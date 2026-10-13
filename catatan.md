@@ -1,0 +1,1 @@
+buatlah kerangka html yang bertema profil sekolah (berisi profil,peta,data,kurikulum,alumni,prestasi,peta,dan info yang lain tentang sekolah) buat tanpa css/javascript
