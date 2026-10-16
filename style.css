@@ -196,16 +196,17 @@ body {
     margin-bottom: 15px;
 }
 
-/* Hero Banner */
+/* Hero Banner (Beranda dengan Background Gambar Sekolah & Overlay) */
 .hero-banner {
-    background: linear-gradient(135deg, #090d16, #1e293b, #0f172a);
-    border: 1px solid rgba(212, 175, 55, 0.3);
+    background: linear-gradient(rgba(3, 7, 18, 0.75), rgba(15, 23, 42, 0.75)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1200&auto=format&fit=crop') no-repeat center center;
+    background-size: cover;
+    border: 1px solid rgba(212, 175, 55, 0.4);
     color: white;
-    padding: 50px;
+    padding: 60px 40px;
     border-radius: 12px;
     margin-bottom: 25px;
     text-align: center;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.5);
 }
 
 .hero-badge {
@@ -229,7 +230,7 @@ body {
 
 .hero-banner p {
     margin-bottom: 25px;
-    color: #94a3b8;
+    color: #f1f1f1;
     font-size: 1.05rem;
     max-width: 800px;
     margin-left: auto;
