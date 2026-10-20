@@ -1,9 +1,29 @@
-/* Pengaturan Global */
+/* ==========================================================================
+   1. PENGATURAN GLOBAL & SCROLLBAR
+   ========================================================================== */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0f172a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #1e293b;
+    border-radius: 5px;
+    border: 2px solid #0f172a;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #10b981;
 }
 
 body {
@@ -14,7 +34,9 @@ body {
     min-height: 100vh;
 }
 
-/* Header Utama */
+/* ==========================================================================
+   2. HEADER UTAMA & TICKER PENGUMUMAN
+   ========================================================================== */
 .main-header {
     background: linear-gradient(135deg, #090d16, #1e293b);
     color: #f8fafc;
@@ -71,9 +93,59 @@ body {
     border-radius: 6px;
     font-size: 0.9rem;
     color: #a7f3d0;
+    display: flex;
+    align-items: center;
 }
 
-/* Layout Container */
+/* Status Indikator Berdenyut pada Jam */
+.pulse-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #10b981;
+    box-shadow: 0 0 0 rgba(16, 185, 129, 0.4);
+    animation: pulseDot 2s infinite;
+    margin-right: 8px;
+}
+
+@keyframes pulseDot {
+    0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+/* Banner Pengumuman Berjalan */
+.ticker-wrap {
+    width: 100%;
+    background: rgba(16, 185, 129, 0.1);
+    border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+    overflow: hidden;
+    padding: 6px 0;
+    white-space: nowrap;
+}
+
+.ticker-move {
+    display: inline-block;
+    padding-left: 100%;
+    animation: ticker 25s linear infinite;
+    color: #6ee7b7;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.ticker-move:hover {
+    animation-play-state: paused;
+}
+
+@keyframes ticker {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-100%, 0, 0); }
+}
+
+/* ==========================================================================
+   3. LAYOUT CONTAINER & SIDEBAR
+   ========================================================================== */
 .app-container {
     display: flex;
     flex: 1;
@@ -84,7 +156,6 @@ body {
     padding: 0 20px;
 }
 
-/* Sidebar Navigasi */
 .sidebar {
     width: 280px;
     background: #162032;
@@ -142,7 +213,9 @@ body {
     box-shadow: 0 4px 15px rgba(16, 185, 129, 0.25);
 }
 
-/* Konten Area & Transisi Animasi */
+/* ==========================================================================
+   4. KONTEN AREA, KARTU & EFEK TRANSISI
+   ========================================================================== */
 .content-area {
     flex: 1;
 }
@@ -176,6 +249,13 @@ body {
     margin-bottom: 25px;
 }
 
+.glass-card {
+    background: rgba(22, 32, 50, 0.7) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(16, 185, 129, 0.2) !important;
+}
+
 .card h2 {
     color: #f8fafc;
     margin-bottom: 15px;
@@ -196,7 +276,9 @@ body {
     margin-bottom: 15px;
 }
 
-/* Hero Banner (Beranda dengan Background images/gambar.png) */
+/* ==========================================================================
+   5. HERO BANNER & TOMBOL AKSI
+   ========================================================================== */
 .hero-banner {
     background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.85)), url('images/gambar.png') no-repeat center center;
     background-size: cover;
@@ -249,6 +331,29 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(16, 185, 129, 0.25);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        60deg,
+        transparent,
+        rgba(255, 255, 255, 0.25),
+        transparent
+    );
+    transform: rotate(30deg);
+    transition: all 0.75s ease;
+}
+
+.btn-primary:hover::after {
+    left: 100%;
 }
 
 .btn-primary:hover {
@@ -257,7 +362,9 @@ body {
     box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
 }
 
-/* Kepala Sekolah & Visi Misi */
+/* ==========================================================================
+   6. KEPALA SEKOLAH, VISI MISI & GRID KARTU
+   ========================================================================== */
 .principal-box {
     display: flex;
     gap: 25px;
@@ -308,7 +415,6 @@ body {
     color: #94a3b8;
 }
 
-/* Grid Kartu */
 .grid-3 {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -316,7 +422,6 @@ body {
     margin-top: 20px;
 }
 
-/* Efek Animasi Kartu */
 .taruna-card {
     background: #0f172a;
     border: 1px solid rgba(16, 185, 129, 0.15);
@@ -373,7 +478,9 @@ body {
     font-size: 0.92rem;
 }
 
-/* Statistik Box */
+/* ==========================================================================
+   7. STATISTIK, PRESTASI & TABEL
+   ========================================================================== */
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -403,7 +510,6 @@ body {
     display: inline-block;
 }
 
-/* Prestasi List */
 .achievement-list {
     display: flex;
     flex-direction: column;
@@ -437,7 +543,6 @@ body {
     font-size: 0.85rem;
 }
 
-/* Tabel */
 .table-container {
     overflow-x: auto;
     margin-top: 20px;
@@ -471,7 +576,9 @@ tbody tr:hover {
     background-color: #0f172a;
 }
 
-/* Berita */
+/* ==========================================================================
+   8. BERITA & GALERI INTERAKTIF
+   ========================================================================== */
 .news-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -505,7 +612,7 @@ tbody tr:hover {
     color: #6ee7b7;
 }
 
-/* Galeri */
+/* Elemen Galeri Lama */
 .gallery-box {
     background: #0f172a;
     border: 1px solid rgba(16, 185, 129, 0.15);
@@ -527,7 +634,53 @@ tbody tr:hover {
     border-color: #10b981;
 }
 
-/* Kontak & Form */
+/* Elemen Galeri Foto Interaktif Baru */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.gallery-item {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    height: 180px;
+    border: 1px solid rgba(16, 185, 129, 0.15);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.gallery-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(15, 23, 42, 0.9), transparent);
+    display: flex;
+    align-items: flex-end;
+    padding: 15px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    color: #6ee7b7;
+    font-weight: 600;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+/* ==========================================================================
+   9. KONTAK, FORMULIR & FOOTER
+   ========================================================================== */
 .contact-address {
     font-style: normal;
     line-height: 1.8;
@@ -591,7 +744,6 @@ tbody tr:hover {
     display: none;
 }
 
-/* Footer Bawah */
 .main-footer {
     background-color: #090d16;
     color: #94a3b8;
@@ -621,4 +773,42 @@ tbody tr:hover {
     background: #10b981;
     color: #030712;
     transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   10. DESAIN RESPONSIF (DESKTOP & MOBILE)
+   ========================================================================== */
+@media (max-width: 992px) {
+    .app-container {
+        flex-direction: column;
+        padding: 0 15px;
+    }
+
+    .sidebar {
+        width: 100%;
+        position: static;
+        top: auto;
+    }
+
+    .vision-mission-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-banner {
+        padding: 40px 20px;
+    }
+
+    .hero-banner h2 {
+        font-size: 1.7rem;
+    }
+
+    .main-header {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+    }
+
+    .header-left {
+        flex-direction: column;
+    }
 }

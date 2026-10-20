@@ -23,15 +23,22 @@
             </div>
         </div>
         <div class="header-right">
-            <span id="live-clock">00:00:00 WIB</span>
+            <span id="live-clock"><span class="pulse-dot"></span>00:00:00 WIB</span>
         </div>
     </header>
+
+    <!-- TICKER PENGUMUMAN BERJALAN (BARU) -->
+    <div class="ticker-wrap">
+        <div class="ticker-move">
+            📢 Penerimaan Peserta Didik Baru (PPDB) Gelombang II Telah Dibuka! | Dapatkan Fasilitas Beasiswa Prestasi Internasional | Informasi Selengkapnya Hubungi Humas Kampus.
+        </div>
+    </div>
 
     <!-- STRUKTUR UTAMA (SIDEBAR & KONTEN) -->
     <div class="app-container">
         
         <!-- SIDEBAR NAVIGASI -->
-        <aside class="sidebar">
+        <aside class="sidebar glass-card">
             <p class="sidebar-title">NAVIGASI UTAMA</p>
             <ul>
                 <li><a href="#beranda" class="nav-link active"><span>🏠</span> Beranda & Sambutan</a></li>
@@ -53,13 +60,14 @@
 
             <!-- 1. BERANDA -->
             <section id="beranda" class="content-section active">
-                <div class="hero-banner" style="background-image: linear-gradient(rgba(3, 7, 18, 0.75), rgba(15, 23, 42, 0.75)), url('images/gambar.png'); background-size: cover; background-position: center;">
+                <div class="hero-banner">
                     <div class="hero-badge">Penerimaan Peserta Didik Baru Terbuka</div>
                     <h2>Membentuk Pemimpin Global Berkarakter Luhur</h2>
                     <p>Sekolah unggulan yang memadukan standar akademik internasional, kedisiplinan positif, dan integritas moral bangsa.</p>
+                    <a href="#kontak" class="btn-primary" style="margin-top: 10px;">Daftar PPDB Sekarang</a>
                 </div>
                 
-                <div class="card">
+                <div class="card glass-card">
                     <h3>Sambutan Kepala Sekolah</h3>
                     <div class="principal-box">
                         <div class="principal-img">
@@ -72,7 +80,7 @@
                     </div>
                 </div>
 
-                <div class="card">
+                <div class="card glass-card">
                     <h3>Pilar Utama Pendidikan Siswa</h3>
                     <div class="grid-3">
                         <div class="taruna-card">
@@ -96,7 +104,7 @@
 
             <!-- 2. PROFIL SEKOLAH -->
             <section id="profil" class="content-section">
-                <div class="card">
+                <div class="card glass-card">
                     <h2>Profil & Filosofi Pendidikan</h2>
                     <p>SMA Nusantara Bhakti didirikan atas visi besar untuk menghadirkan ekosistem pendidikan modern berstandar dunia. Menggabungkan kedisiplinan positif dengan kebebasan berpikir analitis, kreatif, dan inovatif.</p>
                     
@@ -119,7 +127,7 @@
 
             <!-- 3. KURIKULUM INTERNASIONAL -->
             <section id="kurikulum" class="content-section">
-                <div class="card">
+                <div class="card glass-card">
                     <h2>Kurikulum & Jalur Studi Global</h2>
                     <p class="section-desc">Menerapkan kombinasi kurikulum nasional merdeka dan pengayaan standar internasional untuk akselerasi studi lanjut.</p>
                     <div class="grid-3">
@@ -144,7 +152,7 @@
 
             <!-- 4. FASILITAS KAMPUS -->
             <section id="fasilitas" class="content-section">
-                <div class="card">
+                <div class="card glass-card">
                     <h2>Fasilitas Kampus Berstandar Dunia</h2>
                     <p class="section-desc">Dirancang oleh firma arsitektur terkemuka untuk menciptakan lingkungan belajar yang nyaman dan kondusif.</p>
                     <div class="grid-3">
@@ -184,7 +192,7 @@
 
             <!-- 5. KEHIDUPAN SISWA -->
             <section id="kesiswaan" class="content-section">
-                <div class="card">
+                <div class="card glass-card">
                     <h2>Kehidupan Siswa & Ekstrakurikuler</h2>
                     <p class="section-desc">Rutinitas harian yang menanamkan kedisiplinan waktu, kerapian, kerja sama tim, dan kepemimpinan lapangan.</p>
                     <div class="grid-3">
@@ -209,7 +217,7 @@
 
             <!-- 6. DATA & STATISTIK -->
             <section id="data" class="content-section">
-                <div class="card">
+                <div class="card glass-card">
                     <h2>Data & Statistik Institusi</h2>
                     <div class="stats-grid">
                         <div class="stat-box">
@@ -221,7 +229,9 @@
                             <p>Rasio Guru & Siswa</p>
                         </div>
                         <div class="stat-box">
-                            <h3 class="counter" data-target="100">0</h3><span style="font-size:2rem; color:#10b981; font-weight:bold;">%</span>
+                            <div style="display: flex; justify-content: center; align-items: baseline;">
+                                <h3 class="counter" data-target="100">0</h3><span style="font-size:2rem; color:#10b981; font-weight:bold;">%</span>
+                            </div>
                             <p>Diterima di PTN / Top Univ</p>
                         </div>
                         <div class="stat-box">
@@ -234,7 +244,7 @@
 
             <!-- 7. PRESTASI SISWA -->
             <section id="prestasi" class="content-section">
-                <div class="card">
+                <div class="card glass-card">
                     <h2>Prestasi Internasional & Nasional</h2>
                     <div class="achievement-list">
                         <div class="ach-item">
@@ -264,7 +274,7 @@
 
             <!-- 8. JEJAK ALUMNI -->
             <section id="alumni" class="content-section">
-                <div class="card">
+                <div class="card glass-card">
                     <h2>Jejak Global Alumni</h2>
                     <p class="section-desc">Lulusan kami tersebar di berbagai universitas top dunia, lembaga kedinasan, dan posisi kepemimpinan strategis.</p>
                     <div class="table-container">
@@ -305,7 +315,7 @@
 
             <!-- 9. BERITA & INFO -->
             <section id="berita" class="content-section">
-                <div class="card">
+                <div class="card glass-card">
                     <h2>Berita, Agenda & Pengumuman Sekolah</h2>
                     <div class="news-list">
                         <div class="news-card">
@@ -330,34 +340,46 @@
                 </div>
             </section>
 
-            <!-- 10. GALERI FOTO -->
+            <!-- 10. GALERI FOTO (MENGGUNAKAN GRID GALERI INTERAKTIF BARU) -->
             <section id="galeri" class="content-section">
-                <div class="card">
+                <div class="card glass-card">
                     <h2>Galeri Dokumentasi Kampus</h2>
-                    <div class="grid-3">
-                        <div class="gallery-box" style="flex-direction: column; height: auto; padding: 10px;">
-                            <img src="images/apel.png" alt="Apel Pagi Resimen Siswa" style="width:100%; height:130px; object-fit:cover; border-radius:6px;">
-                            <p style="margin-top: 8px; font-size: 0.85rem; color: #94a3b8;">Apel Pagi Resimen Siswa</p>
+                    <div class="gallery-grid">
+                        <div class="gallery-item">
+                            <img src="images/apel.png" alt="Apel Pagi Resimen Siswa">
+                            <div class="gallery-overlay">
+                                <span>Apel Pagi Resimen Siswa</span>
+                            </div>
                         </div>
-                        <div class="gallery-box" style="flex-direction: column; height: auto; padding: 10px;">
-                            <img src="images/praktik.png" alt="Praktik Laboratorium Sains Modern" style="width:100%; height:130px; object-fit:cover; border-radius:6px;">
-                            <p style="margin-top: 8px; font-size: 0.85rem; color: #94a3b8;">Praktik Laboratorium Sains Modern</p>
+                        <div class="gallery-item">
+                            <img src="images/praktik.png" alt="Praktik Laboratorium Sains Modern">
+                            <div class="gallery-overlay">
+                                <span>Praktik Laboratorium Sains</span>
+                            </div>
                         </div>
-                        <div class="gallery-box" style="flex-direction: column; height: auto; padding: 10px;">
-                            <img src="images/marchingband.png" alt="Latihan Baris-Berbaris & Marching Band" style="width:100%; height:130px; object-fit:cover; border-radius:6px;">
-                            <p style="margin-top: 8px; font-size: 0.85rem; color: #94a3b8;">Latihan Baris-Berbaris & Marching Band</p>
+                        <div class="gallery-item">
+                            <img src="images/marchingband.png" alt="Latihan Baris-Berbaris & Marching Band">
+                            <div class="gallery-overlay">
+                                <span>Latihan Marching Band</span>
+                            </div>
                         </div>
-                        <div class="gallery-box" style="flex-direction: column; height: auto; padding: 10px;">
-                            <img src="images/suasana.png" alt="Suasana Belajar di Smart Class" style="width:100%; height:130px; object-fit:cover; border-radius:6px;">
-                            <p style="margin-top: 8px; font-size: 0.85rem; color: #94a3b8;">Suasana Belajar di Smart Class</p>
+                        <div class="gallery-item">
+                            <img src="images/suasana.png" alt="Suasana Belajar di Smart Class">
+                            <div class="gallery-overlay">
+                                <span>Suasana Belajar Smart Class</span>
+                            </div>
                         </div>
-                        <div class="gallery-box" style="flex-direction: column; height: auto; padding: 10px;">
-                            <img src="images/komplek.png" alt="Kompleks Olahraga & Kolam Renang" style="width:100%; height:130px; object-fit:cover; border-radius:6px;">
-                            <p style="margin-top: 8px; font-size: 0.85rem; color: #94a3b8;">Kompleks Olahraga & Kolam Renang</p>
+                        <div class="gallery-item">
+                            <img src="images/komplek.png" alt="Kompleks Olahraga & Kolam Renang">
+                            <div class="gallery-overlay">
+                                <span>Kompleks Olahraga Kampus</span>
+                            </div>
                         </div>
-                        <div class="gallery-box" style="flex-direction: column; height: auto; padding: 10px;">
-                            <img src="images/grandlibrary.png" alt="Studi Kelompok di Grand Library" style="width:100%; height:130px; object-fit:cover; border-radius:6px;">
-                            <p style="margin-top: 8px; font-size: 0.85rem; color: #94a3b8;">Studi Kelompok di Grand Library</p>
+                        <div class="gallery-item">
+                            <img src="images/grandlibrary.png" alt="Studi Kelompok di Grand Library">
+                            <div class="gallery-overlay">
+                                <span>Studi Kelompok Grand Library</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -365,7 +387,7 @@
 
             <!-- 11. KONTAK & LOKASI -->
             <section id="kontak" class="content-section">
-                <div class="card">
+                <div class="card glass-card">
                     <h2>Hubungi Kami & Peta Lokasi Kampus</h2>
                     <address class="contact-address">
                         📍 <strong>Alamat Kampus Utama:</strong> Kompleks Pendidikan Mandiri, Jl. Bhayangkara Raya No. 1, Bogor, Jawa Barat<br>
