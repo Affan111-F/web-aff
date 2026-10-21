@@ -5,13 +5,10 @@ tambahkan animasi agar angka yang ada disana bergulir misalnya dari 0 sampai 600
  tolong tambahi foto dengan tujuan folder images,sesuaikan dengan kode ini dan buat penempatan penempatan sesuai halaman tersebut 
   tambahkan logo yang ada di folder images/logo.png untuk favicon lalu buat juga untuk header dan footer 
 tolong kode html lengkap yang diperbaiki.saat ini webnya sedang kacau
-  tambahkan gambar yang ada di folder images/kepsek.png sebagai foto di sambutan kepala sekolah
-tambahkan gambar yang ada di folder images/gambar.png sebagai foto di background beranda
-tambahkan gambar yang ada di folder images/asramag.png sebagai foto di bagian Asrama Pelajar Modern
-tambahkan gambar yang ada di folder images/loga.png sebagai foto di bagian Olympic Sport Complex
-tambahkan gambar yang ada di folder images/apel.png sebagai foto di bagian Apel & Upacara Kedisiplinan
-tambahkan gambar yang ada di folder images/lab.png sebagai foto di bagian Lab & AI innovation
-tambahkan gambar yang ada di folder images/perpus.png sebagai foto di bagian Grand Library & E-Library
-tolong tambahkan gambar yang ada di folder images/uks.png sebagai foto di bagian Medical Center 24 Jam
-tolong tambahkan gambar yang ada di folder images/drumband.png sebagai foto di bagian Marching Band & Seni Musik
-tolong tambahkan gambar yang ada di folder images/leadership.png sebagai foto di bagian Leadership & Outdoor Camp
+  tambahkan beberapa animsi yang keren
+  ubah warnanya agar menjadi lebih hidup
+  buatkan ide warna yang bagus untuk web ini
+  ubah warna menjadi tema emerald green
+  tambahkan agar ada pengumuman mini diatas web tentang ppdb
+arahkan "Daftar PPDB Sekarang" di beranda untuk mengarah ke bagian 'Hubungi Kami"
+dikode saya,tolong buat agar saat saya scroll ke bawah,di side barr kiri tetap ada dan menunya berpindah dari atas ke bawah,berikan saya kode html,css dan javascriptnya
