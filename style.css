@@ -6,6 +6,7 @@
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    scroll-behavior: smooth; /* Membuat animasi scroll halus */
 }
 
 ::-webkit-scrollbar {
@@ -44,7 +45,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 2px solid #10b981; /* Emerald Green */
+    border-bottom: 2px solid #10b981;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
     position: sticky;
     top: 0;
@@ -81,7 +82,7 @@ body {
 
 .main-header p {
     font-size: 0.78rem;
-    color: #6ee7b7; /* Mint */
+    color: #6ee7b7;
     font-weight: 600;
 }
 
@@ -97,7 +98,6 @@ body {
     align-items: center;
 }
 
-/* Status Indikator Berdenyut pada Jam */
 .pulse-dot {
     display: inline-block;
     width: 8px;
@@ -115,7 +115,6 @@ body {
     100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
 }
 
-/* Banner Pengumuman Berjalan */
 .ticker-wrap {
     width: 100%;
     background: rgba(16, 185, 129, 0.1);
@@ -144,7 +143,7 @@ body {
 }
 
 /* ==========================================================================
-   3. LAYOUT CONTAINER & SIDEBAR
+   3. LAYOUT CONTAINER & SIDEBAR (Sticky Sidebar Aktif)
    ========================================================================== */
 .app-container {
     display: flex;
@@ -154,6 +153,7 @@ body {
     margin: 25px auto;
     gap: 25px;
     padding: 0 20px;
+    align-items: flex-start; /* Memastikan sidebar tidak melar mengikuti tinggi konten */
 }
 
 .sidebar {
@@ -163,9 +163,10 @@ body {
     border-radius: 12px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.2);
     padding: 20px 12px;
-    height: fit-content;
     position: sticky;
-    top: 95px;
+    top: 95px; /* Sidebar tetap menempel di kiri saat di-scroll ke bawah */
+    max-height: calc(100vh - 115px);
+    overflow-y: auto;
 }
 
 .sidebar-title {
@@ -218,26 +219,13 @@ body {
    ========================================================================== */
 .content-area {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 25px; /* Memberikan jarak antar section */
 }
 
 .content-section {
-    display: none;
-}
-
-.content-section.active {
-    display: block;
-    animation: fadeInSchool 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-@keyframes fadeInSchool {
-    from {
-        opacity: 0;
-        transform: translateY(15px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    scroll-margin-top: 100px; /* Jarak agar judul tidak tertutup header sticky saat diklik */
 }
 
 .card {
@@ -388,6 +376,7 @@ body {
     border-radius: 8px;
     border: 1px solid #10b981;
     flex-shrink: 0;
+    overflow: hidden;
 }
 
 .principal-name {
@@ -432,34 +421,11 @@ body {
     overflow: hidden;
 }
 
-.taruna-card h4, 
-.taruna-card p, 
-.taruna-card .card-icon {
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
-}
-
 .taruna-card:hover {
     transform: translateY(-5px);
     border-color: #10b981;
     box-shadow: 0 12px 25px rgba(16, 185, 129, 0.15);
     background: #141d2f;
-}
-
-.taruna-card:hover h4, 
-.taruna-card:hover p, 
-.taruna-card:hover .card-icon {
-    animation: slideFromRight 0.4s ease forwards;
-}
-
-@keyframes slideFromRight {
-    0% {
-        transform: translateX(25px);
-        opacity: 0;
-    }
-    100% {
-        transform: translateX(0);
-        opacity: 1;
-    }
 }
 
 .card-icon {
@@ -612,29 +578,6 @@ tbody tr:hover {
     color: #6ee7b7;
 }
 
-/* Elemen Galeri Lama */
-.gallery-box {
-    background: #0f172a;
-    border: 1px solid rgba(16, 185, 129, 0.15);
-    height: 170px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #94a3b8;
-    font-weight: 600;
-    transition: all 0.35s ease;
-}
-
-.gallery-box:hover {
-    background: linear-gradient(135deg, #162032, #0f172a);
-    color: #6ee7b7;
-    transform: scale(1.02);
-    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.2);
-    border-color: #10b981;
-}
-
-/* Elemen Galeri Foto Interaktif Baru */
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -788,6 +731,7 @@ tbody tr:hover {
         width: 100%;
         position: static;
         top: auto;
+        max-height: none;
     }
 
     .vision-mission-grid {

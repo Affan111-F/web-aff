@@ -1,36 +1,67 @@
 document.addEventListener('DOMContentLoaded', function() {
     
-    // 1. Sistem Navigasi Single-Page (Tab Switching dengan Efek Halus)
-    const navLinks = document.querySelectorAll('.sidebar ul li a');
+    // 1. ScrollSpy Otomatis: Menu Sidebar berpindah dari atas ke bawah saat halaman di-scroll
     const sections = document.querySelectorAll('.content-section');
+    const navLinks = document.querySelectorAll('.sidebar ul li a');
 
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            // Hapus kelas 'active' dari semua menu dan section
-            navLinks.forEach(item => item.classList.remove('active'));
-            sections.forEach(sec => sec.classList.remove('active'));
+    const observerOptions = {
+        root: null,
+        rootMargin: '-20% 0px -60% 0px', // Deteksi aktif ketika bagian atas section berada di area pandang atas
+        threshold: 0
+    };
 
-            // Tambahkan kelas 'active' ke menu yang diklik
-            this.classList.add('active');
-
-            // Ambil target ID dari atribut href
-            const targetId = this.getAttribute('href').substring(1);
-            const targetSection = document.getElementById(targetId);
-
-            if (targetSection) {
-                targetSection.classList.add('active');
-                // Scroll otomatis mulus ke atas halaman konten
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const currentId = entry.target.getAttribute('id');
                 
-                // Jika menu Data yang diklik, jalankan fungsi counter angka
-                if(targetId === 'data') {
+                // Perbarui kelas active pada navigasi
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + currentId) {
+                        link.classList.add('active');
+                        
+                        // Otomatis pastikan menu yang aktif terlihat di dalam kotak sidebar jika sidebar discroll
+                        link.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }
+                });
+
+                // Jika section data yang aktif, jalankan animasi angka
+                if (currentId === 'data') {
                     runCounters();
                 }
             }
         });
+    }, observerOptions);
+
+    sections.forEach(section => {
+        observer.observe(section);
     });
+
+    // Klik menu sidebar untuk melompat halus ke section tujuan
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
+            
+            if (targetSection) {
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+
+    // Hubungkan tombol "Daftar PPDB Sekarang" di beranda agar langsung melompat ke bagian 'kontak'
+    const ppdbBtn = document.querySelector('.hero-banner .btn-primary');
+    if (ppdbBtn) {
+        ppdbBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const kontakSection = document.getElementById('kontak');
+            if (kontakSection) {
+                kontakSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    }
 
     // 2. Jam Digital Real-Time di Header
     function updateClock() {
@@ -40,52 +71,40 @@ document.addEventListener('DOMContentLoaded', function() {
             const hours = String(now.getHours()).padStart(2, '0');
             const minutes = String(now.getMinutes()).padStart(2, '0');
             const seconds = String(now.getSeconds()).padStart(2, '0');
-            clockElement.textContent = `${hours}:${minutes}:${seconds} WIB`;
+            clockElement.innerHTML = `<span class="pulse-dot"></span>${hours}:${minutes}:${seconds} WIB`;
         }
     }
 
     setInterval(updateClock, 1000);
-    updateClock(); // Jalankan langsung saat dimuat
+    updateClock();
 
-    // 3. 🌟 ANIMASI COUNTER ANGKA (Dari 1 naik ke nilai target saat discroll / diklik)
+    // 3. Animasi Counter Angka
     let counterHasRun = false;
 
     function runCounters() {
+        if (counterHasRun) return;
         const counters = document.querySelectorAll('.counter');
         counters.forEach(counter => {
             const target = +counter.getAttribute('data-target');
-            let current = 1; // Mulai dari angka 1
+            let current = 1;
             counter.textContent = current;
 
-            // Tentukan kecepatan increment berdasarkan besar target
             const increment = target / 50; 
 
             const updateCount = () => {
                 current += increment;
                 if (current < target) {
                     counter.textContent = Math.ceil(current);
-                    setTimeout(updateCount, 25); // Kecepatan animasi hitung
+                    setTimeout(updateCount, 25);
                 } else {
-                    counter.textContent = target; // Pastikan berhenti persis di angka target
+                    counter.textContent = target;
                 }
             };
 
             updateCount();
         });
+        counterHasRun = true;
     }
-
-    // Deteksi scroll ke bawah agar counter otomatis aktif saat section Data terlihat
-    window.addEventListener('scroll', function() {
-        const dataSection = document.getElementById('data');
-        if (dataSection) {
-            const rect = dataSection.getBoundingClientRect();
-            // Jika posisi section berada di dalam layar browser dan belum pernah dijalankan
-            if (rect.top <= window.innerHeight && rect.bottom >= 0 && !counterHasRun) {
-                runCounters();
-                counterHasRun = true;
-            }
-        }
-    });
 
     // 4. Tombol Kembali ke Atas (Back to Top)
     const backToTopBtn = document.getElementById('backToTop');
