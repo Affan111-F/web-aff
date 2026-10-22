@@ -137,4 +137,41 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 6000);
         });
     }
+
+    // ==========================================================================
+    // 6. ANIMASI SCROLL REVEAL (Slide-in dari berbagai arah ke tengah)
+    // ==========================================================================
+    const revealElements = document.querySelectorAll('.card, .taruna-card, .stat-box, .ach-item, .news-card, .gallery-item, .vm-box');
+    
+    // Otomatis assign kelas arah slide secara bergantian
+    revealElements.forEach((el, index) => {
+        el.classList.add('reveal');
+        if (index % 3 === 0) {
+            el.classList.add('from-left');
+        } else if (index % 3 === 1) {
+            el.classList.add('from-bottom');
+        } else {
+            el.classList.add('from-right');
+        }
+    });
+
+    const revealObserverOptions = {
+        root: null,
+        rootMargin: '0px 0px -50px 0px',
+        threshold: 0.1
+    };
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                // Uncomment baris di bawah jika ingin animasi hanya berjalan sekali per elemen
+                // observer.unobserve(entry.target);
+            }
+        });
+    }, revealObserverOptions);
+
+    revealElements.forEach(el => {
+        revealObserver.observe(el);
+    });
 });

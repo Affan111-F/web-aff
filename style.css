@@ -1,7 +1,7 @@
 /* ==========================================================================
    1. PENGATURAN GLOBAL & SCROLLBAR
    ========================================================================== */
-* {
+   * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -153,7 +153,7 @@ body {
     margin: 25px auto;
     gap: 25px;
     padding: 0 20px;
-    align-items: flex-start; /* Memastikan sidebar tidak melar mengikuti tinggi konten */
+    align-items: flex-start;
 }
 
 .sidebar {
@@ -164,7 +164,7 @@ body {
     box-shadow: 0 10px 25px rgba(0,0,0,0.2);
     padding: 20px 12px;
     position: sticky;
-    top: 95px; /* Sidebar tetap menempel di kiri saat di-scroll ke bawah */
+    top: 95px;
     max-height: calc(100vh - 115px);
     overflow-y: auto;
 }
@@ -221,11 +221,11 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 25px; /* Memberikan jarak antar section */
+    gap: 25px;
 }
 
 .content-section {
-    scroll-margin-top: 100px; /* Jarak agar judul tidak tertutup header sticky saat diklik */
+    scroll-margin-top: 100px;
 }
 
 .card {
@@ -416,16 +416,8 @@ body {
     border: 1px solid rgba(16, 185, 129, 0.15);
     padding: 25px;
     border-radius: 12px;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     position: relative;
     overflow: hidden;
-}
-
-.taruna-card:hover {
-    transform: translateY(-5px);
-    border-color: #10b981;
-    box-shadow: 0 12px 25px rgba(16, 185, 129, 0.15);
-    background: #141d2f;
 }
 
 .card-icon {
@@ -461,12 +453,6 @@ body {
     color: white;
     padding: 25px;
     border-radius: 10px;
-    transition: transform 0.3s ease;
-}
-
-.stat-box:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.15);
 }
 
 .stat-box h3 {
@@ -491,13 +477,6 @@ body {
     border: 1px solid rgba(16, 185, 129, 0.15);
     padding: 16px 20px;
     border-radius: 10px;
-    transition: all 0.3s ease;
-}
-
-.ach-item:hover {
-    background: #141d2f;
-    border-color: #10b981;
-    transform: translateX(5px);
 }
 
 .ach-badge {
@@ -534,10 +513,6 @@ th {
     font-weight: 600;
 }
 
-tbody tr {
-    transition: background 0.2s;
-}
-
 tbody tr:hover {
     background-color: #0f172a;
 }
@@ -557,14 +532,6 @@ tbody tr:hover {
     border: 1px solid rgba(16, 185, 129, 0.15);
     padding: 22px;
     border-radius: 10px;
-    transition: all 0.3s ease;
-}
-
-.news-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 20px rgba(16, 185, 129, 0.15);
-    background: #141d2f;
-    border-color: #10b981;
 }
 
 .news-date {
@@ -755,4 +722,61 @@ tbody tr:hover {
     .header-left {
         flex-direction: column;
     }
+}
+
+/* ==========================================================================
+   11. ANIMASI SCROLL & HOVER SLIDE-IN
+   ========================================================================== */
+
+/* Kelas dasar untuk elemen yang akan dianimasikan saat scroll */
+.reveal {
+    opacity: 0;
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, opacity;
+}
+
+/* Arah-arah geser (slide) sebelum aktif */
+.reveal.from-left {
+    transform: translateX(-80px);
+}
+
+.reveal.from-right {
+    transform: translateX(80px);
+}
+
+.reveal.from-bottom {
+    transform: translateY(60px);
+}
+
+.reveal.scale-up {
+    transform: scale(0.9);
+}
+
+/* Kondisi saat elemen masuk ke viewport (aktif & kembali ke tengah) */
+.reveal.active {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+}
+
+/* Efek Hover Slide Tambahan pada Kartu */
+.taruna-card, .stat-box, .news-card, .ach-item, .vm-box {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, background-color 0.4s ease;
+}
+
+.taruna-card:hover, .news-card:hover {
+    transform: translateY(-8px) scale(1.01);
+    border-color: #10b981;
+    box-shadow: 0 12px 25px rgba(16, 185, 129, 0.15);
+    background: #141d2f;
+}
+
+.stat-box:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.15);
+}
+
+.ach-item:hover {
+    background: #141d2f;
+    border-color: #10b981;
+    transform: translateX(10px);
 }
