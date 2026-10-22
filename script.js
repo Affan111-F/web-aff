@@ -1,12 +1,34 @@
 document.addEventListener('DOMContentLoaded', function() {
     
+    // ==========================================================================
+    // 0. FITUR: Header & Ticker Auto Hide/Show saat Scroll
+    // ==========================================================================
+    let lastScrollTop = 0;
+    const headerWrapper = document.querySelector('.site-header-wrapper'); 
+    const scrollThreshold = 50; 
+
+    window.addEventListener('scroll', function() {
+        let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+        
+        if (!headerWrapper) return;
+
+        if (currentScroll > lastScrollTop && currentScroll > scrollThreshold) {
+            headerWrapper.classList.add('header-hidden');
+        } else if (currentScroll < lastScrollTop) {
+            headerWrapper.classList.remove('header-hidden');
+        }
+        
+        lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; 
+    }, { passive: true });
+
+
     // 1. ScrollSpy Otomatis: Menu Sidebar berpindah dari atas ke bawah saat halaman di-scroll
     const sections = document.querySelectorAll('.content-section');
     const navLinks = document.querySelectorAll('.sidebar ul li a');
 
     const observerOptions = {
         root: null,
-        rootMargin: '-20% 0px -60% 0px', // Deteksi aktif ketika bagian atas section berada di area pandang atas
+        rootMargin: '-20% 0px -60% 0px', 
         threshold: 0
     };
 
@@ -15,18 +37,14 @@ document.addEventListener('DOMContentLoaded', function() {
             if (entry.isIntersecting) {
                 const currentId = entry.target.getAttribute('id');
                 
-                // Perbarui kelas active pada navigasi
                 navLinks.forEach(link => {
                     link.classList.remove('active');
                     if (link.getAttribute('href') === '#' + currentId) {
                         link.classList.add('active');
-                        
-                        // Otomatis pastikan menu yang aktif terlihat di dalam kotak sidebar jika sidebar discroll
                         link.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                     }
                 });
 
-                // Jika section data yang aktif, jalankan animasi angka
                 if (currentId === 'data') {
                     runCounters();
                 }
@@ -143,7 +161,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // ==========================================================================
     const revealElements = document.querySelectorAll('.card, .taruna-card, .stat-box, .ach-item, .news-card, .gallery-item, .vm-box');
     
-    // Otomatis assign kelas arah slide secara bergantian
     revealElements.forEach((el, index) => {
         el.classList.add('reveal');
         if (index % 3 === 0) {
@@ -165,8 +182,6 @@ document.addEventListener('DOMContentLoaded', function() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
-                // Uncomment baris di bawah jika ingin animasi hanya berjalan sekali per elemen
-                // observer.unobserve(entry.target);
             }
         });
     }, revealObserverOptions);

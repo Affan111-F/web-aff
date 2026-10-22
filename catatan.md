@@ -12,3 +12,6 @@ tolong kode html lengkap yang diperbaiki.saat ini webnya sedang kacau
   tambahkan agar ada pengumuman mini diatas web tentang ppdb
 arahkan "Daftar PPDB Sekarang" di beranda untuk mengarah ke bagian 'Hubungi Kami"
 dikode saya,tolong buat agar saat saya scroll ke bawah,di side barr kiri tetap ada dan menunya berpindah dari atas ke bawah,berikan saya kode html,css dan javascriptnya
+buatkan agar saat saya scroll kebawah yang atas ikut hilang dan saat saya scroll ke atas lagi muncul lagi 
+tolong naikkan sedikit kolom di side barr kiri saat kira scroll ke bawah
+tolong tambahkan dan sesuaikan semuanya

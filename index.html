@@ -11,33 +11,38 @@
 </head>
 <body>
 
-    <!-- KEPALA HALAMAN (HEADER) -->
-    <header class="main-header">
-        <div class="header-left">
-            <div class="logo-box">
-                <img src="images/logo.png" alt="Logo SMA Nusantara Bhakti" style="width: 35px; height: 35px; object-fit: contain;">
+    <!-- ========================================================================== -->
+    <!-- PEMBUNGKUS UTAMA ATAS (HEADER + TICKER) - IKUT HILANG/MUNCUL BERSAMAAN -->
+    <!-- ========================================================================== -->
+    <div class="site-header-wrapper">
+        <!-- KEPALA HALAMAN (HEADER) -->
+        <header class="main-header">
+            <div class="header-left">
+                <div class="logo-box">
+                    <img src="images/logo.png" alt="Logo SMA Nusantara Bhakti" style="width: 35px; height: 35px; object-fit: contain;">
+                </div>
+                <div>
+                    <h1>SMA Nusantara Bhakti</h1>
+                    <p>Leading Global Values, Character & Academic Excellence</p>
+                </div>
             </div>
-            <div>
-                <h1>SMA Nusantara Bhakti</h1>
-                <p>Leading Global Values, Character & Academic Excellence</p>
+            <div class="header-right">
+                <span id="live-clock"><span class="pulse-dot"></span>00:00:00 WIB</span>
             </div>
-        </div>
-        <div class="header-right">
-            <span id="live-clock"><span class="pulse-dot"></span>00:00:00 WIB</span>
-        </div>
-    </header>
+        </header>
 
-    <!-- TICKER PENGUMUMAN BERJALAN -->
-    <div class="ticker-wrap">
-        <div class="ticker-move">
-            📢 Penerimaan Peserta Didik Baru (PPDB) Gelombang II Telah Dibuka! | Dapatkan Fasilitas Beasiswa Prestasi Internasional | Informasi Selengkapnya Hubungi Humas Kampus.
+        <!-- TICKER PENGUMUMAN BERJALAN -->
+        <div class="ticker-wrap">
+            <div class="ticker-move">
+                📢 Penerimaan Peserta Didik Baru (PPDB) Gelombang II Telah Dibuka! | Dapatkan Fasilitas Beasiswa Prestasi Internasional | Informasi Selengkapnya Hubungi Humas Kampus.
+            </div>
         </div>
     </div>
 
     <!-- STRUKTUR UTAMA (SIDEBAR & KONTEN) -->
     <div class="app-container">
         
-        <!-- SIDEBAR NAVIGASI (Sticky & Sinkron Scroll) -->
+        <!-- SIDEBAR NAVIGASI -->
         <aside class="sidebar glass-card">
             <p class="sidebar-title">NAVIGASI UTAMA</p>
             <ul>
@@ -434,7 +439,7 @@
     <!-- KAKI HALAMAN (FOOTER) -->
     <footer class="main-footer">
         <div style="display: flex; align-items: center; gap: 12px;">
-            <img src="images/logo.png" alt="Logo Footer" style="width: 28px; height: 28px; object-type: contain;">
+            <img src="images/logo.png" alt="Logo Footer" style="width: 28px; height: 28px; object-fit: contain;">
             <p>&copy; 2026 SMA Nusantara Bhakti. Seluruh Hak Cipta Dilindungi Undang-Undang.</p>
         </div>
         <button id="backToTop" class="btn-top">Kembali ke Atas &uarr;</button>
