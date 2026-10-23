@@ -15,3 +15,16 @@ dikode saya,tolong buat agar saat saya scroll ke bawah,di side barr kiri tetap a
 buatkan agar saat saya scroll kebawah yang atas ikut hilang dan saat saya scroll ke atas lagi muncul lagi 
 tolong naikkan sedikit kolom di side barr kiri saat kira scroll ke bawah
 tolong tambahkan dan sesuaikan semuanya
+tolong perbaiki agar saat kita scroll ke atas lagi, kolom "beranda & sambutan" masih bisa kelihatan 
+tolong sesuaikan dan beri hasil akhir sendiri sendiri
+tolong buatkan agar saat saya ngescroll ke bawah,side bar kiri naik sedikit dan saat saya scroll ke atas lagi tolong turunkan sidebar itu kembali
+ada yang salah kenapa saat saya pencet tombol "daftar PPDB sekarang" di beranda malah tidak pergi ke hubungi kami?
+adakah ide untuk menambah suatu animasi yang bagus untuk web ini?
+tolong sesuaikan dan berikan saya kode lengkapnya
+tolong jadikan web saya menjadi mobile friendly
+ada yang salah,kenapa ada banyak yang hilang.tolong perbaiki dan beri saya hasil akhir yang bagus
+kenapa efek hovernya hilang dari yang sebelumnya?,tolong perbaiki dan beri saya kode akhgir
+kenapa masih tidak ada?
+maksud saya efek hover slide kolom dan teks yang awalnya dari berbagai arah akan ke tengah
+kenapa harus refresh dulu agar bisa memencet 'daftar ppdb sekarang'?
+tambahkan dan beri hasil akhir

@@ -1,7 +1,4 @@
-/* ==========================================================================
-   1. PENGATURAN GLOBAL & SCROLLBAR
-   ========================================================================== */
-   * {
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -9,8 +6,12 @@
     scroll-behavior: smooth;
 }
 
+html {
+    scroll-padding-top: 100px; 
+}
+
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -19,8 +20,7 @@
 
 ::-webkit-scrollbar-thumb {
     background: #1e293b;
-    border-radius: 5px;
-    border: 2px solid #0f172a;
+    border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -33,11 +33,9 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
-/* ==========================================================================
-   2. HEADER UTAMA, TICKER & SMART HIDE/SHOW WRAPPER
-   ========================================================================== */
 .site-header-wrapper {
     position: sticky;
     top: 0;
@@ -52,7 +50,7 @@ body {
 .main-header {
     background: linear-gradient(135deg, #090d16, #1e293b);
     color: #f8fafc;
-    padding: 1.2rem 2.5rem;
+    padding: 1.1rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -69,52 +67,44 @@ body {
 .logo-box {
     background: linear-gradient(135deg, #10b981, #34d399);
     color: #030712;
-    font-weight: 800;
-    font-size: 1.3rem;
-    padding: 10px 14px;
+    padding: 8px 10px;
     border-radius: 8px;
-    box-shadow: 0 0 12px rgba(16, 185, 129, 0.3);
-    animation: pulseLogo 3s infinite ease-in-out;
 }
 
-@keyframes pulseLogo {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.04); }
-}
+.main-header h1 { font-size: 1.3rem; color: #f8fafc; }
+.main-header p { font-size: 0.75rem; color: #6ee7b7; font-weight: 600; }
 
-.main-header h1 {
-    font-size: 1.4rem;
-    letter-spacing: 0.5px;
-    color: #f8fafc;
-}
-
-.main-header p {
-    font-size: 0.78rem;
+.mobile-menu-toggle {
+    display: none;
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid #10b981;
     color: #6ee7b7;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
     font-weight: 600;
+    cursor: pointer;
 }
 
 #live-clock {
     font-weight: 600;
     background: rgba(16, 185, 129, 0.08);
     border: 1px solid rgba(16, 185, 129, 0.25);
-    padding: 6px 14px;
+    padding: 6px 12px;
     border-radius: 6px;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: #a7f3d0;
     display: flex;
     align-items: center;
 }
 
 .pulse-dot {
-    display: inline-block;
     width: 8px;
     height: 8px;
     border-radius: 50%;
     background-color: #10b981;
-    box-shadow: 0 0 0 rgba(16, 185, 129, 0.4);
-    animation: pulseDot 2s infinite;
     margin-right: 8px;
+    animation: pulseDot 2s infinite;
 }
 
 @keyframes pulseDot {
@@ -124,9 +114,7 @@ body {
 }
 
 .ticker-wrap {
-    width: 100%;
     background: rgba(16, 185, 129, 0.1);
-    border-bottom: 1px solid rgba(16, 185, 129, 0.2);
     overflow: hidden;
     padding: 6px 0;
     white-space: nowrap;
@@ -138,11 +126,6 @@ body {
     animation: ticker 25s linear infinite;
     color: #6ee7b7;
     font-size: 0.85rem;
-    font-weight: 500;
-}
-
-.ticker-move:hover {
-    animation-play-state: paused;
 }
 
 @keyframes ticker {
@@ -150,9 +133,6 @@ body {
     100% { transform: translate3d(-100%, 0, 0); }
 }
 
-/* ==========================================================================
-   3. LAYOUT CONTAINER & SIDEBAR (Dinaikkan posisinya dengan top: 20px)
-   ========================================================================== */
 .app-container {
     display: flex;
     flex: 1;
@@ -164,36 +144,34 @@ body {
     align-items: flex-start;
 }
 
+/* ==========================================================================
+   PERBAIKAN SIDEBAR KIRI (STABIL & RAPI)
+   ========================================================================== */
 .sidebar {
     width: 280px;
     background: #162032;
     border: 1px solid rgba(16, 185, 129, 0.15);
     border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
     padding: 20px 12px;
     position: sticky;
-    top: 20px; /* Dinaikkan ke atas agar lebih dekat dengan batas layar */
-    max-height: calc(100vh - 40px);
+    top: 95px; 
+    max-height: calc(100vh - 115px);
     overflow-y: auto;
+    transition: top 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 100;
 }
 
 .sidebar-title {
     font-size: 0.7rem;
     font-weight: 700;
-    letter-spacing: 1px;
     color: #10b981;
     margin-bottom: 12px;
-    padding-left: 12px;
+    padding-left: 10px;
+    letter-spacing: 1px;
 }
 
-.sidebar ul {
-    list-style: none;
-}
-
-.sidebar ul li {
-    margin-bottom: 6px;
-}
-
+.sidebar ul { list-style: none; }
+.sidebar ul li { margin-bottom: 6px; }
 .sidebar ul li a {
     display: flex;
     align-items: center;
@@ -203,38 +181,25 @@ body {
     text-decoration: none;
     border-radius: 8px;
     font-size: 0.93rem;
-    font-weight: 500;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.3s;
 }
 
-.sidebar ul li a:hover {
-    background: rgba(16, 185, 129, 0.1);
-    color: #6ee7b7;
-    transform: translateX(6px);
-    border-left: 4px solid #10b981;
-    padding-left: 14px;
-}
-
-.sidebar ul li a.active {
+.sidebar ul li a:hover, .sidebar ul li a.active {
     background: linear-gradient(135deg, #059669, #10b981);
     color: #030712;
     font-weight: 700;
     box-shadow: 0 4px 15px rgba(16, 185, 129, 0.25);
 }
 
-/* ==========================================================================
-   4. KONTEN AREA, KARTU & EFEK TRANSISI
-   ========================================================================== */
 .content-area {
     flex: 1;
     display: flex;
     flex-direction: column;
     gap: 25px;
+    min-width: 0;
 }
 
-.content-section {
-    scroll-margin-top: 100px;
-}
+.content-section { scroll-margin-top: 100px; }
 
 .card {
     background: #162032;
@@ -246,9 +211,8 @@ body {
 }
 
 .glass-card {
-    background: rgba(22, 32, 50, 0.7) !important;
+    background: rgba(22, 32, 50, 0.75) !important;
     backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(16, 185, 129, 0.2) !important;
 }
 
@@ -261,20 +225,6 @@ body {
     font-size: 1.5rem;
 }
 
-.card h3 {
-    margin-top: 20px;
-    margin-bottom: 10px;
-    color: #6ee7b7;
-}
-
-.section-desc {
-    color: #94a3b8;
-    margin-bottom: 15px;
-}
-
-/* ==========================================================================
-   5. HERO BANNER & TOMBOL AKSI
-   ========================================================================== */
 .hero-banner {
     background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.85)), url('images/gambar.png') no-repeat center center;
     background-size: cover;
@@ -284,7 +234,6 @@ body {
     border-radius: 12px;
     margin-bottom: 25px;
     text-align: center;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
 }
 
 .hero-badge {
@@ -297,24 +246,12 @@ body {
     font-weight: 700;
     display: inline-block;
     margin-bottom: 15px;
-    letter-spacing: 1px;
 }
 
-.hero-banner h2 {
-    font-size: 2.2rem;
-    margin-bottom: 12px;
-    color: #ffffff;
-}
+.hero-banner h2 { font-size: 2.2rem; margin-bottom: 12px; color: #ffffff; }
+.hero-banner p { margin-bottom: 25px; color: #cbd5e1; font-size: 1.05rem; max-width: 800px; margin-left: auto; margin-right: auto; }
 
-.hero-banner p {
-    margin-bottom: 25px;
-    color: #cbd5e1;
-    font-size: 1.05rem;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
+/* TOMBOL UTAMA DENGAN EFEK KILAU (SHIMMER) */
 .btn-primary {
     background: linear-gradient(135deg, #10b981, #059669);
     color: #030712;
@@ -325,10 +262,9 @@ body {
     display: inline-block;
     border: none;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.25);
     position: relative;
     overflow: hidden;
+    transition: all 0.3s ease;
 }
 
 .btn-primary::after {
@@ -340,27 +276,26 @@ body {
     height: 200%;
     background: linear-gradient(
         60deg,
-        transparent,
-        rgba(255, 255, 255, 0.25),
-        transparent
+        transparent 30%,
+        rgba(255, 255, 255, 0.25) 50%,
+        transparent 70%
     );
-    transform: rotate(30deg);
-    transition: all 0.75s ease;
+    transform: rotate(30deg) translateX(-100%);
+    animation: shimmerEffect 4s infinite;
 }
 
-.btn-primary:hover::after {
-    left: 100%;
+@keyframes shimmerEffect {
+    0% { transform: rotate(30deg) translateX(-100%); }
+    20% { transform: rotate(30deg) translateX(100%); }
+    100% { transform: rotate(30deg) translateX(100%); }
 }
 
 .btn-primary:hover {
     background: linear-gradient(135deg, #34d399, #10b981);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 0 25px rgba(16, 185, 129, 0.6);
 }
 
-/* ==========================================================================
-   6. KEPALA SEKOLAH, VISI MISI & GRID KARTU
-   ========================================================================== */
 .principal-box {
     display: flex;
     gap: 25px;
@@ -376,107 +311,43 @@ body {
     width: 90px;
     height: 110px;
     background: #1e293b;
-    color: #10b981;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     border-radius: 8px;
     border: 1px solid #10b981;
     flex-shrink: 0;
     overflow: hidden;
 }
 
-.principal-name {
-    margin-top: 10px;
-    color: #6ee7b7;
-}
-
-.vision-mission-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-top: 20px;
-}
-
-.vm-box {
-    background: #0f172a;
-    border: 1px solid rgba(16, 185, 129, 0.15);
-    padding: 22px;
-    border-radius: 10px;
-}
-
-.vm-box ul {
-    padding-left: 20px;
-    margin-top: 8px;
-    color: #94a3b8;
-}
-
-.grid-3 {
+.vision-mission-grid, .grid-3, .stats-grid, .news-list, .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 20px;
     margin-top: 20px;
 }
 
-.taruna-card {
+.vm-box, .taruna-card, .stat-box, .news-card {
     background: #0f172a;
     border: 1px solid rgba(16, 185, 129, 0.15);
-    padding: 25px;
-    border-radius: 12px;
-    position: relative;
-    overflow: hidden;
+    padding: 22px;
+    border-radius: 10px;
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
+}
+
+@keyframes floatAnimation {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
 }
 
 .card-icon {
     font-size: 2rem;
     margin-bottom: 12px;
-}
-
-.taruna-card h4 {
-    color: #6ee7b7;
-    margin-bottom: 8px;
-    font-size: 1.1rem;
-}
-
-.taruna-card p {
-    color: #94a3b8;
-    font-size: 0.92rem;
-}
-
-/* ==========================================================================
-   7. STATISTIK, PRESTASI & TABEL
-   ========================================================================== */
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
-    text-align: center;
-}
-
-.stat-box {
-    background: linear-gradient(135deg, #090d16, #0f172a);
-    border: 1px solid rgba(16, 185, 129, 0.2);
-    color: white;
-    padding: 25px;
-    border-radius: 10px;
-}
-
-.stat-box h3 {
-    font-size: 2.3rem;
-    color: #10b981;
-    margin-bottom: 5px;
     display: inline-block;
+    animation: floatAnimation 4s ease-in-out infinite;
 }
 
-.achievement-list {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-top: 20px;
-}
+.stat-box h3 { font-size: 2.3rem; color: #10b981; margin-bottom: 5px; }
 
+.achievement-list { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
 .ach-item {
     display: flex;
     align-items: center;
@@ -486,79 +357,19 @@ body {
     padding: 16px 20px;
     border-radius: 10px;
 }
-
 .ach-badge {
     background: linear-gradient(135deg, #10b981, #059669);
     color: #030712;
     padding: 6px 12px;
     border-radius: 6px;
     font-weight: 800;
-    font-size: 0.85rem;
 }
 
-.table-container {
-    overflow-x: auto;
-    margin-top: 20px;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-table, th, td {
-    border: 1px solid rgba(16, 185, 129, 0.15);
-}
-
-th, td {
-    padding: 13px 16px;
-    text-align: left;
-}
-
-th {
-    background-color: #0f172a;
-    color: #6ee7b7;
-    font-weight: 600;
-}
-
-tbody tr:hover {
-    background-color: #0f172a;
-}
-
-/* ==========================================================================
-   8. BERITA & GALERI INTERAKTIF
-   ========================================================================== */
-.news-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
-}
-
-.news-card {
-    background: #0f172a;
-    border: 1px solid rgba(16, 185, 129, 0.15);
-    padding: 22px;
-    border-radius: 10px;
-}
-
-.news-date {
-    font-size: 0.8rem;
-    color: #10b981;
-    font-weight: 600;
-}
-
-.news-card h4 {
-    margin: 8px 0;
-    color: #6ee7b7;
-}
-
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 15px;
-    margin-top: 20px;
-}
+.table-container { overflow-x: auto; margin-top: 20px; }
+table { width: 100%; border-collapse: collapse; min-width: 550px; }
+table, th, td { border: 1px solid rgba(16, 185, 129, 0.15); }
+th, td { padding: 13px 16px; text-align: left; }
+th { background-color: #0f172a; color: #6ee7b7; }
 
 .gallery-item {
     position: relative;
@@ -567,14 +378,7 @@ tbody tr:hover {
     height: 180px;
     border: 1px solid rgba(16, 185, 129, 0.15);
 }
-
-.gallery-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-}
-
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
 .gallery-overlay {
     position: absolute;
     inset: 0;
@@ -587,50 +391,12 @@ tbody tr:hover {
     color: #6ee7b7;
     font-weight: 600;
 }
+.gallery-item:hover img { transform: scale(1.1); }
+.gallery-item:hover .gallery-overlay { opacity: 1; }
 
-.gallery-item:hover img {
-    transform: scale(1.1);
-}
-
-.gallery-item:hover .gallery-overlay {
-    opacity: 1;
-}
-
-/* ==========================================================================
-   9. KONTAK, FORMULIR & FOOTER
-   ========================================================================== */
-.contact-address {
-    font-style: normal;
-    line-height: 1.8;
-    margin-bottom: 20px;
-}
-
-.map-box {
-    border-radius: 10px;
-    overflow: hidden;
-    margin-bottom: 25px;
-    border: 1px solid rgba(16, 185, 129, 0.15);
-}
-
-.contact-form-box {
-    background: #0f172a;
-    padding: 25px;
-    border-radius: 10px;
-    border: 1px solid rgba(16, 185, 129, 0.15);
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: 600;
-    font-size: 0.9rem;
-    color: #6ee7b7;
-}
-
+.contact-form-box { background: #0f172a; padding: 25px; border-radius: 10px; border: 1px solid rgba(16, 185, 129, 0.15); }
+.form-group { margin-bottom: 15px; }
+.form-group label { display: block; margin-bottom: 5px; font-weight: 600; color: #6ee7b7; }
 .form-group input, .form-group textarea {
     width: 100%;
     padding: 11px 14px;
@@ -638,44 +404,9 @@ tbody tr:hover {
     border: 1px solid rgba(16, 185, 129, 0.25);
     color: #f8fafc;
     border-radius: 6px;
-    font-size: 0.95rem;
-    outline: none;
-    transition: all 0.25s ease;
 }
-
-.form-group input:focus, .form-group textarea:focus {
-    border-color: #10b981;
-    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
-}
-
-.alert {
-    margin-top: 15px;
-    padding: 12px;
-    background-color: rgba(16, 185, 129, 0.15);
-    color: #34d399;
-    border: 1px solid rgba(16, 185, 129, 0.4);
-    border-radius: 6px;
-    font-weight: 500;
-}
-
-.hidden {
-    display: none;
-}
-
-.main-footer {
-    background-color: #090d16;
-    color: #94a3b8;
-    text-align: center;
-    padding: 22px;
-    margin-top: auto;
-    font-size: 0.9rem;
-    border-top: 2px solid rgba(16, 185, 129, 0.2);
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 15px;
-}
+.alert { margin-top: 15px; padding: 12px; background-color: rgba(16, 185, 129, 0.15); color: #34d399; border-radius: 6px; }
+.hidden { display: none; }
 
 .btn-top {
     background: transparent;
@@ -684,97 +415,32 @@ tbody tr:hover {
     padding: 6px 14px;
     border-radius: 6px;
     cursor: pointer;
-    transition: all 0.3s ease;
 }
+.btn-top:hover { background: #10b981; color: #030712; }
 
-.btn-top:hover {
-    background: #10b981;
-    color: #030712;
-    transform: translateY(-2px);
-}
-
-/* ==========================================================================
-   10. DESAIN RESPONSIF (DESKTOP & MOBILE)
-   ========================================================================== */
-@media (max-width: 992px) {
-    .app-container {
-        flex-direction: column;
-        padding: 0 15px;
-    }
-
-    .sidebar {
-        width: 100%;
-        position: static;
-        top: auto;
-        max-height: none;
-    }
-
-    .vision-mission-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .hero-banner {
-        padding: 40px 20px;
-    }
-
-    .hero-banner h2 {
-        font-size: 1.7rem;
-    }
-
-    .main-header {
-        flex-direction: column;
-        gap: 12px;
-        text-align: center;
-    }
-
-    .header-left {
-        flex-direction: column;
-    }
-}
-
-/* ==========================================================================
-   11. ANIMASI SCROLL & HOVER SLIDE-IN
-   ========================================================================== */
+/* ANIMASI SCROLL REVEAL */
 .reveal {
     opacity: 0;
     transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: transform, opacity;
 }
 
-.reveal.from-left {
-    transform: translateX(-80px);
-}
-
-.reveal.from-right {
-    transform: translateX(80px);
-}
-
-.reveal.from-bottom {
-    transform: translateY(60px);
-}
-
-.reveal.scale-up {
-    transform: scale(0.9);
-}
+.reveal.from-left { transform: translateX(-80px); }
+.reveal.from-right { transform: translateX(80px); }
+.reveal.from-bottom { transform: translateY(60px); }
 
 .reveal.active {
     opacity: 1;
     transform: translate(0, 0) scale(1);
 }
 
-.taruna-card, .stat-box, .news-card, .ach-item, .vm-box {
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, background-color 0.4s ease;
-}
-
 .taruna-card:hover, .news-card:hover {
-    transform: translateY(-8px) scale(1.01);
     border-color: #10b981;
     box-shadow: 0 12px 25px rgba(16, 185, 129, 0.15);
     background: #141d2f;
 }
 
 .stat-box:hover {
-    transform: translateY(-4px);
     box-shadow: 0 8px 20px rgba(16, 185, 129, 0.15);
 }
 
@@ -782,4 +448,30 @@ tbody tr:hover {
     background: #141d2f;
     border-color: #10b981;
     transform: translateX(10px);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+@media (max-width: 992px) {
+    .app-container { flex-direction: column; padding: 0 15px; }
+    .sidebar {
+        width: 100%;
+        position: fixed;
+        left: 0;
+        top: 75px !important;
+        z-index: 999;
+        max-height: 75vh;
+        background: #162032;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        transform: translateY(-120%);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .sidebar.mobile-open {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+    }
+    .mobile-menu-toggle { display: inline-block; }
+    .main-header { flex-direction: column; gap: 12px; text-align: center; }
 }

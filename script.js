@@ -1,75 +1,87 @@
 document.addEventListener('DOMContentLoaded', function() {
     
-    // ==========================================================================
-    // 0. FITUR: Header & Ticker Auto Hide/Show saat Scroll
-    // ==========================================================================
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const sidebar = document.getElementById('sidebarNav');
+
+    if (mobileMenuToggle && sidebar) {
+        mobileMenuToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            sidebar.classList.toggle('mobile-open');
+        });
+
+        sidebar.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => sidebar.classList.remove('mobile-open'));
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!sidebar.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+                sidebar.classList.remove('mobile-open');
+            }
+        });
+    }
+
     let lastScrollTop = 0;
     const headerWrapper = document.querySelector('.site-header-wrapper'); 
+    const heroBanner = document.querySelector('.hero-banner');
     const scrollThreshold = 50; 
 
     window.addEventListener('scroll', function() {
         let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
         
+        if (heroBanner) {
+            heroBanner.style.backgroundPositionY = (currentScroll * 0.35) + 'px';
+        }
+
         if (!headerWrapper) return;
 
-        if (currentScroll > lastScrollTop && currentScroll > scrollThreshold) {
-            headerWrapper.classList.add('header-hidden');
-        } else if (currentScroll < lastScrollTop) {
+        if (currentScroll <= 10) {
             headerWrapper.classList.remove('header-hidden');
+            if (window.innerWidth > 992 && sidebar) sidebar.style.top = '130px'; 
+        } 
+        else if (currentScroll > lastScrollTop && currentScroll > scrollThreshold) {
+            headerWrapper.classList.add('header-hidden');
+            if (window.innerWidth > 992 && sidebar) sidebar.style.top = '20px'; 
+        } 
+        else if (currentScroll < lastScrollTop) {
+            headerWrapper.classList.remove('header-hidden');
+            if (window.innerWidth > 992 && sidebar) sidebar.style.top = '130px'; 
         }
         
         lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; 
     }, { passive: true });
 
-
-    // 1. ScrollSpy Otomatis: Menu Sidebar berpindah dari atas ke bawah saat halaman di-scroll
     const sections = document.querySelectorAll('.content-section');
     const navLinks = document.querySelectorAll('.sidebar ul li a');
 
-    const observerOptions = {
-        root: null,
-        rootMargin: '-20% 0px -60% 0px', 
-        threshold: 0
-    };
-
+    const observerOptions = { root: null, rootMargin: '-20% 0px -60% 0px', threshold: 0 };
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const currentId = entry.target.getAttribute('id');
-                
                 navLinks.forEach(link => {
                     link.classList.remove('active');
                     if (link.getAttribute('href') === '#' + currentId) {
                         link.classList.add('active');
-                        link.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                     }
                 });
-
-                if (currentId === 'data') {
-                    runCounters();
-                }
+                if (currentId === 'data') runCounters();
             }
         });
     }, observerOptions);
 
-    sections.forEach(section => {
-        observer.observe(section);
-    });
+    sections.forEach(section => observer.observe(section));
 
-    // Klik menu sidebar untuk melompat halus ke section tujuan
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
             const targetId = this.getAttribute('href').substring(1);
             const targetSection = document.getElementById(targetId);
-            
             if (targetSection) {
                 targetSection.scrollIntoView({ behavior: 'smooth' });
             }
         });
     });
 
-    // Hubungkan tombol "Daftar PPDB Sekarang" di beranda agar langsung melompat ke bagian 'kontak'
     const ppdbBtn = document.querySelector('.hero-banner .btn-primary');
     if (ppdbBtn) {
         ppdbBtn.addEventListener('click', function(e) {
@@ -81,34 +93,26 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // 2. Jam Digital Real-Time di Header
     function updateClock() {
         const clockElement = document.getElementById('live-clock');
         if (clockElement) {
             const now = new Date();
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const seconds = String(now.getSeconds()).padStart(2, '0');
-            clockElement.innerHTML = `<span class="pulse-dot"></span>${hours}:${minutes}:${seconds} WIB`;
+            const h = String(now.getHours()).padStart(2, '0');
+            const m = String(now.getMinutes()).padStart(2, '0');
+            const s = String(now.getSeconds()).padStart(2, '0');
+            clockElement.innerHTML = `<span class="pulse-dot"></span>${h}:${m}:${s} WIB`;
         }
     }
-
     setInterval(updateClock, 1000);
     updateClock();
 
-    // 3. Animasi Counter Angka
     let counterHasRun = false;
-
     function runCounters() {
         if (counterHasRun) return;
-        const counters = document.querySelectorAll('.counter');
-        counters.forEach(counter => {
+        document.querySelectorAll('.counter').forEach(counter => {
             const target = +counter.getAttribute('data-target');
             let current = 1;
-            counter.textContent = current;
-
             const increment = target / 50; 
-
             const updateCount = () => {
                 current += increment;
                 if (current < target) {
@@ -118,75 +122,75 @@ document.addEventListener('DOMContentLoaded', function() {
                     counter.textContent = target;
                 }
             };
-
             updateCount();
         });
         counterHasRun = true;
     }
 
-    // 4. Tombol Kembali ke Atas (Back to Top)
     const backToTopBtn = document.getElementById('backToTop');
     if (backToTopBtn) {
-        backToTopBtn.addEventListener('click', function() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
+        backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
     }
 
-    // 5. Interaksi Formulir Kontak Taruna
     const contactForm = document.getElementById('contactForm');
     const formAlert = document.getElementById('formAlert');
-
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            const namaInput = document.getElementById('nama').value;
-            
-            formAlert.textContent = `Terima kasih, ${namaInput}! Aspirasi atau pesan Anda telah berhasil dikirim ke bagian Kesekretariatan Taruna.`;
+            const nama = document.getElementById('nama').value;
+            formAlert.textContent = `Terima kasih, ${nama}! Pesan Anda telah terkirim ke Kesekretariatan.`;
             formAlert.classList.remove('hidden');
-
             contactForm.reset();
-
-            setTimeout(function() {
-                formAlert.classList.add('hidden');
-            }, 6000);
+            setTimeout(() => formAlert.classList.add('hidden'), 5000);
         });
     }
 
-    // ==========================================================================
-    // 6. ANIMASI SCROLL REVEAL (Slide-in dari berbagai arah ke tengah)
-    // ==========================================================================
     const revealElements = document.querySelectorAll('.card, .taruna-card, .stat-box, .ach-item, .news-card, .gallery-item, .vm-box');
     
     revealElements.forEach((el, index) => {
         el.classList.add('reveal');
-        if (index % 3 === 0) {
-            el.classList.add('from-left');
-        } else if (index % 3 === 1) {
-            el.classList.add('from-bottom');
-        } else {
-            el.classList.add('from-right');
-        }
+        if (index % 3 === 0) el.classList.add('from-left');
+        else if (index % 3 === 1) el.classList.add('from-bottom');
+        else el.classList.add('from-right');
     });
 
-    const revealObserverOptions = {
-        root: null,
-        rootMargin: '0px 0px -50px 0px',
-        threshold: 0.1
-    };
-
-    const revealObserver = new IntersectionObserver((entries, observer) => {
+    const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
             }
         });
-    }, revealObserverOptions);
+    }, { root: null, rootMargin: '0px 0px -50px 0px', threshold: 0.1 });
 
-    revealElements.forEach(el => {
-        revealObserver.observe(el);
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // ==========================================================================
+    // EFEK 3D TILT YANG DIPERBAIKI (Akurat pada kartu yang disentuh)
+    // ==========================================================================
+    const tiltCards = document.querySelectorAll('.taruna-card, .stat-box, .news-card, .vm-box');
+    
+    tiltCards.forEach(card => {
+        card.addEventListener('mousemove', function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left; 
+            const y = e.clientY - rect.top;  
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = ((y - centerY) / centerY) * -8;
+            const rotateY = ((x - centerX) / centerX) * 8;
+            
+            this.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+            this.style.transition = 'transform 0.4s ease';
+        });
+        
+        card.addEventListener('mouseenter', function() {
+            this.style.transition = 'none'; 
+        });
     });
 });
